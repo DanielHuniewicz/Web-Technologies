@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <title>lab7</title>
+
+    <style>
+        a{
+            margin-left: 10px;
+        }
+        label {
+            width: 100px;
+            display: inline-block;
+            text-align: right;
+            padding-right: 10px;
+        }
+        input[type='submit']{
+            margin-left: 110px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label for="imie"> Imię: </label><input type="text"  id="imie"><br>
+        <label for="nazwisko"> Nazwisko:</label><input type="text"  id="nazwisko"><br>
+        <label for="wiek"> Wiek: </label><input type="number"  id="wiek"><br>
+        <label for="email"> E-mail: </label><input type="email"  id="mail"><br>
+        <input type="hidden" name="id" id="id">
+        <input type="submit" value="Zapisz">
+    </form>
+
+<div id="content"></div>
+    
+<script>
+
+getPersons(osobyNaStronie);
+
+document.forms[0].onsubmit = function(evt){
+    evt.preventDefault();
+    const id = document.getElementById('id').value;
+    var osoba = {
+        firstName: document.getElementById('imie').value,
+        familyName: document.getElementById('nazwisko').value,
+        age: document.getElementById('wiek').value,
+        mail: document.getElementById('mail').value
+    }
+
+    if(id > 0){
+
+        putPerson(id, osoba, odswiez);
+    } 
+    else {
+
+        postPerson(osoba, odswiez);
+    }
+    console.log(osoba);
+   
+}
+
+function getPersons(callback){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', "http://tomcat.zecer.wi.zut.edu.pl/PeopleREST/api/person", true);
+    xhr.send();
+    xhr.onload = function(){
+        var obj = JSON.parse(xhr.responseText);
+        if(callback) callback(obj);
+    }
+}
+
+function getPerson(id, callback){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', "http://tomcat.zecer.wi.zut.edu.pl/PeopleREST/api/person/" + id, true);
+    xhr.send();
+    xhr.onload = function(){
+        var obj = JSON.parse(xhr.responseText);
+        if(callback) callback(obj);
+    }
+}
+
+function postPerson(osoba, callback){
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', "http://tomcat.zecer.wi.zut.edu.pl/PeopleREST/api/person", true);
+    xhr.setRequestHeader('Content-type','application/json');
+    xhr.send(JSON.stringify(osoba));
+    xhr.onload = function(){
+        if(callback) callback();
+    }
+}
+
+function putPerson(id, osoba, callback){
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', "http://tomcat.zecer.wi.zut.edu.pl/PeopleREST/api/person/" + id, true);
+    xhr.setRequestHeader('Content-type','application/json');
+    xhr.send(JSON.stringify(osoba));
+    xhr.onload = function(){
+        if(callback) callback();
+    }
+}
+    
+function deletePerson(id, callback){
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', "http://tomcat.zecer.wi.zut.edu.pl/PeopleREST/api/person/" + id, true);
+    xhr.send();
+    xhr.onload = function(){
+        console.log('osoba' + id + 'skasowana');
+        if(callback) callback();
+    }
+}    
+
+    function osobyNaStronie(osoby){
+        for(var o of osoby){
+            var p = document.createElement('p');
+            p.innerHTML = o.id + ") " + o.firstName + " " + o.familyName + " " + o.mail + " ";
+            document.getElementById('content').appendChild(p);
+            var a = document.createElement('a');
+            a.href = "#";
+            a.innerHTML = "usuń";
+            a.dataset['id'] = o.id;
+            a.onclick = function(evt){
+                var id = evt.target.dataset['id'];
+                deletePerson(id,odswiez);
+            }
+            p.appendChild(a);
+
+            var a2 = document.createElement('a');
+            a2.href = "#";
+            a2.innerHTML = "edytuj";
+            a2.dataset['id'] = o.id;
+            a2.onclick = function(evt){
+                document.querySelectorAll('#content p').forEach(p => p.style.backgroundColor = 'none');
+                evt.target.parentElement.style.backgroundColor = 'yellow';
+                const id = evt.target.dataset['id'];
+                getPerson(id, ladujFormularz)
+            }
+            p.appendChild(a2);
+        }
+    }
+
+
+function ladujFormularz(osoba){
+    document.getElementById('imie').value = osoba.firstName;
+    document.getElementById('nazwisko').value = osoba.familyName;
+    document.getElementById('wiek').value = osoba.age;
+    document.getElementById('mail').value = osoba.mail;
+
+}
+    
+function odswiez (){
+    //document.forms[0].reset();
+    document.getElementById('content').innerHTML = "";
+    getPersons(osobyNaStronie);
+}
+    
+</script>
+
+</body>
+</html>

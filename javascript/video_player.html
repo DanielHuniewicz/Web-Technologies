@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<script>
+function start(){
+var vid = document.getElementById("video");
+//console.log("start");
+}
+window.onload = start; 
+</script>
+
+</head>
+<body>
+
+<video id="video" width="700" height="300">
+  <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
+</video>
+
+<div>
+    <progress id="pasek" value="0" max="888" style="width:700px"></progress>
+</div>
+<div>
+<br><button onclick="play()">Play</button>
+<button onclick="pause()">Pause</button>
+<button onclick="mniej()">Volume -</button>
+<button onclick="wiecej()">Volume +</button>
+<button onclick="dalej()">10+</button>
+<button onclick="cofnij()">10-</button>
+</div>
+
+<p>Aktualny czas: <span id="p1"></span></p>
+<p>Całkowita długość: <span id="p2"></span></p>
+<p>Aktualna głośność: <span id="p3"></span></p>
+
+<script>
+var vid = document.getElementById("video");
+
+
+vid.ontimeupdate = function() {
+  
+  //console.log(vid.currentTime);
+  document.getElementById('pasek').value = vid.currentTime;
+  document.getElementById('p3').innerHTML = vid.volume;
+
+  s=vid.currentTime%60;
+  m=Math.floor((vid.currentTime%3600)/60);
+  document.getElementById('p1').innerHTML = m + " min " + s.toFixed(0) + " sec";
+};
+
+vid.onloadedmetadata = function() {
+  
+  console.log(vid.duration);
+  s=vid.duration%60;
+  m=Math.floor((vid.duration%3600)/60);
+  console.log(m,s.toFixed(0));
+  document.getElementById('p2').innerHTML = m + " min " + s.toFixed(0) + " sec";
+};
+
+var pasek = document.getElementById("pasek");
+pasek.onclick = function(){
+    console.log(event);
+}
+
+pasek.addEventListener("click", seek);
+function seek(r) {
+    var procent = r.offsetX / this.offsetWidth;
+    vid.currentTime = procent * vid.duration;
+    pasek.value = procent / 888;
+}
+
+//console.log(vid.currentTime);
+function play(){
+    vid.play();
+}
+function pause(){
+    vid.pause();
+}
+function mniej(){
+vid.volume -= 0.2;
+}
+function wiecej(){
+vid.volume += 0.2;
+}
+function dalej(){
+vid.currentTime += 10;
+}
+function cofnij(){
+vid.currentTime -= 10;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script>
+
+
+</script>
+</head>
+<body>
+
+    <iframe id="mapa" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> 
+
+<script>
+
+
+var x = document.getElementById("demo");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(location) {
+    var ll, url;
+    ll = [location.coords.latitude, location.coords.longitude].join(',');
+    url = "https://www.google.com/maps/embed/v1/view?zoom=10&center=" + ll + "&key=AIzaSyC78AdT4v69sXclGyK2iM1Gnp0HBxcqhc8";
+    document.getElementById("mapa").src = url;
+    //document.body.background = url;
+} 
+
+
+window.onload = getLocation; 
+
+
+</script>
+</body>
+</html>

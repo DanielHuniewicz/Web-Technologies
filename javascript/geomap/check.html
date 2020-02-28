@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<p>Historia położenia</p>
+
+<p id="dane"></p>
+
+<script>
+var x = document.getElementById("dane");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    //navigator.geolocation.getCurrentPosition(showPosition);
+	navigator.geolocation.watchPosition(showPosition);
+  } else { 
+    x.innerHTML = "Lokalizacja nie jest dostępna.";
+  }
+}
+
+function showPosition(position) {
+
+  var akapit = document.createElement("div");
+  akapit.setAttribute("id", "Div1");
+  akapit.innerHTML = position.coords.latitude + ", " + position.coords.longitude + ", wysokość: " + position.coords.altitude + ", dokładność: " + position.coords.accuracy + "m  ";
+  document.body.appendChild(akapit);
+  
+  var btn = document.createElement("BUTTON");
+  btn.innerHTML = "usuń";   
+  akapit.appendChild(btn);
+  btn.onclick = function(){
+    var elem = document.getElementById("Div1");
+elem.parentNode.removeChild(elem);}
+}
+
+window.onload = getLocation; 
+</script>
+</body>
+</html>

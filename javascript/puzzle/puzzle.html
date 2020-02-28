@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+#text div {
+  position:relative;
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 0;
+}
+
+#text {
+  width:614px;
+  height:614px;
+  background:white;
+  border:5px solid black;
+  margin:auto;
+}
+
+#images {
+  width: 100%
+}
+
+img {
+  height: 200px;
+  width: 200px;
+}
+
+#drag4,
+#drag5,
+#drag6,
+#drag7,
+#drag8,
+#drag9,
+#drag10,
+#drag11,
+#drag12 {
+  height: 200px;
+  width: 200px;
+  
+  display: inline-block;
+}
+
+
+</style>
+</head>
+<body>
+<h1 align="center">Ułóż puzzle</h1>
+<br>
+<div id="text">
+  <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div id="div4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div id="div5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div id="div6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div id="div7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div id="div8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  <div id="div9" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</div>
+<br>
+<div id="images">
+  <img id="drag4" src="1.png" draggable="true" ondragstart="drag(event)"></img>
+  <img id="drag5" src="2.png" draggable="true" ondragstart="drag(event)"></img>
+  <img id="drag6" src="3.png" draggable="true" ondragstart="drag(event)"></img>
+  <img id="drag7" src="4.png" draggable="true" ondragstart="drag(event)"></img>
+  <img id="drag8" src="5.png" draggable="true" ondragstart="drag(event)"></img>
+  <img id="drag9" src="6.png" draggable="true" ondragstart="drag(event)"></img>
+  <img id="drag10" src="7.png" draggable="true" ondragstart="drag(event)"></img>
+  <img id="drag11" src="8.png" draggable="true" ondragstart="drag(event)"></img>
+  <img id="drag12" src="9.png" draggable="true" ondragstart="drag(event)"></img>
+</div>
+
+<button onclick="win()">5-</button>
+<script>
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+
+/*
+var dr4 = document.getElementById(drag4);
+var dr5 = document.getElementById(drag5);
+var dr6 = document.getElementById(drag6);
+var dr7 = document.getElementById(drag7);
+var dr8 = document.getElementById(drag8);
+var dr9 = document.getElementById(drag9);
+var dr10 = document.getElementById(drag10);
+var dr11 = document.getElementById(drag11);
+var dr12 = document.getElementById(drag12);
+
+var di1 = document.getElementById(div1);
+var di2 = document.getElementById(div2);
+var di3 = document.getElementById(div3);
+var di4 = document.getElementById(div4);
+var di5 = document.getElementById(div5);
+var di6 = document.getElementById(div6);
+var di7 = document.getElementById(div7);
+var di8 = document.getElementById(div8);
+var di9 = document.getElementById(div9);
+
+
+function win(){
+if (di1.find('img').length){
+console.log("win");
+}
+else{
+console.log("lose");
+}
+}
+window.onload = win; 
+*/
+</script>
+</body>
+</html>

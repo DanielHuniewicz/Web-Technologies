@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+
+
+Wybierz ID osoby:<input id="persona" type="text" name="ID"> 
+<button onclick="getPerson()">Pobierz</button><br><br>
+Pobierz wszystkie dane:<button onclick="getPersons()">Pobierz</button>
+<br><div id="dane"></div>
+
+<script>
+function getPerson (){
+    var id_persony = document.getElementById('persona').value;
+    var req = new XMLHttpRequest();
+req.responseType = 'json';
+req.open('GET', "http://tomcat.zecer.wi.zut.edu.pl/PeopleREST/api/person/"+id_persony, true);
+req.onload  = function() {
+   var jsonResponse = req.response;
+   console.log(jsonResponse);
+    var myJSON = JSON.stringify(jsonResponse);
+    document.getElementById('dane').innerHTML=myJSON;
+};
+req.send(null);
+}
+    
+    function getPersons (){
+    var req = new XMLHttpRequest();
+req.responseType = 'json';
+req.open('GET', "http://tomcat.zecer.wi.zut.edu.pl/PeopleREST/api/person", true);
+req.onload  = function() {
+   var jsonResponse = req.response;
+   console.log(jsonResponse);
+    var myJSON = JSON.stringify(jsonResponse);
+    document.getElementById('dane').innerHTML=myJSON;
+};
+req.send(null);
+}   
+
+</script>
+
+</body>
+</html>
