@@ -6,6 +6,7 @@
 		header('Location: index.php');
 		exit();
   }
+
   $welcome = "<h1>Witaj ".$_SESSION['name'].'</h1>';
   $logout = "<a href='logout.php' class='btn btn-outline-light'>Wyloguj sie</a>";
 	$display_points = "<b>Punkty</b>: ".$_SESSION['points'].' ';
@@ -26,8 +27,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>    
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
  		<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
     <style>
       p,h1,h3 {color: #F5F5F5;}
     </style>
@@ -44,20 +45,14 @@
         Vestibulum sed ligula eget lorem bibendum lobortis vel congue metus.</p>
         <h3>Twoje dane</h3>
         <p class="lead">
-        <?php
-          echo $display_points;
-          echo $display_money;
-          echo $display_days;
-          echo $display_mail;
-        ?><br><br>
-        <?php echo $logout?><br>
+          <?php
+            echo $display_points;
+            echo $display_money;
+            echo $display_days;
+            echo $display_mail;
+          ?><br><br>
+          <?php echo $logout?><br>
         </p>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../bootstrap/assets/js/vendor/popper.min.js"></script>
-    <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
-
   </body>
 </html>

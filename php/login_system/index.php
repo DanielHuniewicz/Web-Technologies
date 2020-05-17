@@ -16,10 +16,11 @@
 		<meta name="author" content="">
 		<title>System logowania</title>
 
-		<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
-		<link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-		<script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=ehD5VdAsTHYbFyIc7pSt5in9NfvyRjc3x1mD7mwkH9DHYlJAOL8C7u8CNQ4V1dMSJwNzw-ZF3so3A0s93IMrmjpbXG15nCv_gfaMtuXG57Y" charset="UTF-8"></script></head>
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>    
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+ 		<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 		<style>
 			.container {
 				display: flex;
